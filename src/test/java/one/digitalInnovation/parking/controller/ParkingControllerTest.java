@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package one.digitalInnovation.parking;
+package one.digitalInnovation.parking.controller;
 
 import io.restassured.RestAssured;
 import one.digitalInnovation.parking.controller.dto.ParkingCreateDTO;
@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
  * @author silas
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ParkingControllerITTest {
+class ParkingControllerTest extends AbstractContainerBase {
 
     @LocalServerPort
     private int randomPort;
@@ -27,12 +27,12 @@ public class ParkingControllerITTest {
     @BeforeEach
     public void setUpTest() {
         RestAssured.port = randomPort;
-
     }
 
     @Test
     void whenFindAllThenCheckResult() {
         RestAssured.given()
+                .auth().basic("user", "12345")
                 .when()
                 .get("/parking")
                 .then()
@@ -40,23 +40,22 @@ public class ParkingControllerITTest {
     }
 
     @Test
-    void create() {
-
+    void whenCreateThenCheckIsCreated() {
         var createDTO = new ParkingCreateDTO();
         createDTO.setColor("AMARELO");
-        createDTO.setLicense("PKS-5555");
-        createDTO.setModel("CAMARO");
-        createDTO.setState("BA");
+        createDTO.setLicense("WRT-5555");
+        createDTO.setModel("BRASILIA");
+        createDTO.setState("SP");
 
         RestAssured.given()
                 .when()
+                .auth().basic("user", "12345")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(createDTO)
                 .post("/parking")
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .body("license", Matchers.equalTo("PKS-5555"))
+                .body("license", Matchers.equalTo("WRT-5555"))
                 .body("color", Matchers.equalTo("AMARELO"));
     }
-
 }
