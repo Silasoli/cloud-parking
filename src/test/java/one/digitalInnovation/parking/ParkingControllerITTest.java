@@ -37,7 +37,6 @@ public class ParkingControllerITTest {
                 .get("/parking")
                 .then()
                 .statusCode(HttpStatus.OK.value());
-
     }
 
     @Test
@@ -58,7 +57,6 @@ public class ParkingControllerITTest {
                 .statusCode(HttpStatus.CREATED.value())
                 .body("license", Matchers.equalTo("PKS-5555"))
                 .body("color", Matchers.equalTo("AMARELO"));
-
     }
 
 }

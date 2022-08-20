@@ -5,13 +5,17 @@
 package one.digitalInnovation.parking.model;
 
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**                                                                                                                                                                                                                                                                                                  
  *
  * @author silas
  */
+@Entity
 public class Parking {
     
+    @Id
     private String id;
     private String license; 
     private String state;
