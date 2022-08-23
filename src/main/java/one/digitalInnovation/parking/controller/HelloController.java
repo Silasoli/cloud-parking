@@ -14,13 +14,13 @@ import springfox.documentation.annotations.ApiIgnore;
  * @author silas
  */
 @RestController
-@RequestMapping("/pinkou-braudo")
+@RequestMapping("/pinkou-braudos")
 @ApiIgnore
 public class HelloController {
     
     @GetMapping
     public String hello(){
-        return "Um salve para o grupo Os pinkou braudo - 🍌🐟";
+        return "Um salve para o grupo: Os pinkou braudos";
     }
     
 }
